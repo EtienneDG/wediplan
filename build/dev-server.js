@@ -1,5 +1,5 @@
 'use strict'
-require('./check-versions')()
+// require('./check-versions')()
 
 const config = require('../config')
 if (!process.env.NODE_ENV) {
@@ -15,6 +15,11 @@ const webpackConfig = (process.env.NODE_ENV === 'testing' || process.env.NODE_EN
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
 
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const count = require('../server/routes/count');
+
+const devServer = require('../server')
 // default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
@@ -23,7 +28,21 @@ const autoOpenBrowser = !!config.dev.autoOpenBrowser
 // https://github.com/chimurai/http-proxy-middleware
 const proxyTable = config.dev.proxyTable
 
-const app = express()
+let app = express();
+require('dotenv').load();
+
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGO_URI);
+
+app.use(bodyParser.json());
+app.use('/api/count', count);
+
+// app.use(express.static(path.join(__dirname, '../dist')));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../index.html'));
+// });
+
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {

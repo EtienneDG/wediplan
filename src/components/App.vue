@@ -20,14 +20,14 @@
             <v-icon>contact_mail</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
+            <v-list-tile-title>Invités</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Wediplan 1.1</v-toolbar-title>
+      <v-toolbar-title>Wediplan</v-toolbar-title>
     </v-toolbar>
     <main>
       <v-content>
