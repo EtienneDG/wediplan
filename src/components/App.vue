@@ -48,12 +48,12 @@
   export default {
     data: () => ({
       drawer: true,
-      item:{
-        href: "/counter"
+      item: {
+        href: '/counter'
       }
     }),
     props: {
       source: String
     }
-  }
+  };
 </script>

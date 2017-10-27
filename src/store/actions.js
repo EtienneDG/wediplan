@@ -1,13 +1,14 @@
-import * as types from './mutation-types'
-import passport from 'passport-local'
+/* eslint-disable camelcase */
+import * as types from './mutation-types';
+// import passport from 'passport-local';
 
 export const getCount = ({commit}) => {
   fetch(`/api/count`, {
     method: 'GET'
   })
   .then(response => response.json())
-  .then(json => commit(types.GET_COUNT, json))
-}
+  .then(json => commit(types.GET_COUNT, json));
+};
 
 export const incCount = ({commit}, count_payload) => {
   fetch(`/api/count`, {
@@ -19,12 +20,12 @@ export const incCount = ({commit}, count_payload) => {
     body: JSON.stringify({ count: ++count_payload })
   })
   .then(response => response.json())
-  .then(json => commit(types.INC_COUNT, json))
-}
-
-export const login = ({commit}) => {
-  passport.authenticate('local'),
-  (req,res) => {
-    res.redirect('/')
-  }
+  .then(json => commit(types.INC_COUNT, json));
 };
+
+// export const login = ({commit}) => {
+//   passport.authenticate('local'),
+//   (req, res) => {
+//     res.redirect('/');
+//   };
+// };

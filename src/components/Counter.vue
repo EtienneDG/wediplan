@@ -9,12 +9,12 @@
 <script>
 export default {
   methods: {
-    incCount() {
-      this.$store.dispatch('incCount', this.$store.state.counts.count.count)
+    incCount () {
+      this.$store.dispatch('incCount', this.$store.state.counts.count.count);
     }
   },
-  mounted() {
-    this.$store.dispatch('getCount')
+  mounted () {
+    this.$store.dispatch('getCount');
   }
-}
+};
 </script>
