@@ -1,4 +1,5 @@
 import * as types from './mutation-types'
+import passport from 'passport-local'
 
 export const getCount = ({commit}) => {
   fetch(`/api/count`, {
@@ -20,3 +21,10 @@ export const incCount = ({commit}, count_payload) => {
   .then(response => response.json())
   .then(json => commit(types.INC_COUNT, json))
 }
+
+export const login = ({commit}) => {
+  passport.authenticate('local'),
+  (req,res) => {
+    res.redirect('/')
+  }
+};

@@ -12,7 +12,8 @@ import Counter from './components/Counter.vue'
 const router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/counter', component: Counter }
+    { path: '/counter', component: Counter },
+    { path: '/test', component: Counter },
   ]
 })
 

@@ -1,14 +1,17 @@
 {
-  "name": "mevn-boilerplate",
-  "description": "A MEVN Biolerplate project (Mongo, Express, Vue, Node)",
+  "name": "wediplan",
+  "description": "",
   "version": "1.0.0",
-  "author": "Anton de Regt <antonderegt@gmail.com>",
+  "author": "edg",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "serve": "cross-env NODE_ENV=production webpack -w",
-    "start": "node server"
+    // "dev": "cross-env NODE_ENV=development webpack-dev-server --port 3000 --open --hot",
+    // "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "dev": "node build/dev-server.js",
+    "start": "npm run dev",
+    "build": "node build/build.js",
+    "serve": "cross-env NODE_ENV=production webpack -w"
+    //"start": "node server"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
@@ -18,7 +21,8 @@
     "nodemon": "^1.11.0",
     "passport-local": "^1.0.0",
     "vue": "^2.2.1",
-    "vue-router": "^2.4.0",
+    "vue-handsontable-official": "^1.0.0",
+    "vue-router": "^3.0.1",
     "vuetify": "^0.16.7",
     "vuex": "^2.3.0"
   },
@@ -27,14 +31,21 @@
     "babel-loader": "^6.0.0",
     "babel-preset-latest": "^6.0.0",
     "cross-env": "^3.0.0",
-    "css-loader": "^0.25.0",
+    "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.9.0",
+    "friendly-errors-webpack-plugin": "^1.6.1",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.2.1",
     "webpack": "^2.7.0",
-    "webpack-dev-server": "^2.2.0"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.2.0",
+    "webpack-hot-middleware": "^2.20.0",
+    "webpack-merge": "^4.1.0"
   }
 }

@@ -1,11 +1,25 @@
+require('eventsource-polyfill')
 const path = require('path')
 const webpack = require('webpack')
+const merge= require('webpack-merge')
 // const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 // const extractSass = new ExtractTextPlugin({
 //     filename: "[name].[contenthash].css",
 //     disable: process.env.NODE_ENV === "development"
 // });
+
+var hotClient = require('webpack-hot-middleware/client?noInfo=true&reload=true')
+
+hotClient.subscribe(function (event) {
+  if (event.action === 'reload') {
+    window.location.reload()
+  }
+})
+
 
 module.exports = {
   entry: './src/main.js',
@@ -37,6 +51,10 @@ module.exports = {
           name: '[name].[ext]?[hash]'
         }
       },
+      // {
+      //   test: /\.styl$/,
+      //   loader: ['style-loader', 'css-loader', 'stylus-loader']
+      // }
       // {
       //   test: /\.scss$/,
       //   use: extractSass.extract({
@@ -87,5 +105,23 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
+  ])
+}
+
+if(process.env.NODE_ENV === 'dev'){
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': config.dev.env
+    }),
+    // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    // https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true
+    }),
+    new FriendlyErrorsPlugin()
   ])
 }
