@@ -29,3 +29,17 @@ export const incCount = ({commit}, count_payload) => {
 //     res.redirect('/');
 //   };
 // };
+
+export const getGuests = ({commit}) => {
+  fetch(`/api/guest/all`, {
+    method: 'GET'
+  })
+  .then(response => {
+    console.log(response);
+    response.json();
+  })
+  .then(json => {
+    console.log(json);
+    commit(types.GET_GUESTS, json);
+  });
+};

@@ -7,5 +7,8 @@ export const mutations = {
   },
   [types.INC_COUNT] (state, count_payload) {
     state.counts.count = count_payload;
+  },
+  [types.GET_GUESTS] (state, guests_payload) {
+    state.guests.guests = guests_payload;
   }
 };

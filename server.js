@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const count = require('./server/routes/count');
+// const count = require('./server/routes/count');
+const guest = require('./server/routes/guest');
 
 let app = express();
 require('dotenv').load();
@@ -11,7 +12,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URI);
 
 app.use(bodyParser.json());
-app.use('/api/count', count);
+// app.use('/api/count', count);
+app.use('/api/guest', guest);
 
 app.use(express.static(path.join(__dirname, './dist')));
 

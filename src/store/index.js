@@ -8,6 +8,9 @@ Vue.use(Vuex);
 const state = {
   counts: {
     count: -1
+  },
+  guests: {
+    guests: []
   }
 };
 
