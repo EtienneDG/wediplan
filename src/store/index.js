@@ -10,7 +10,6 @@ const state = {
     count: -1
   },
   guests: {
-    guests: []
   }
 };
 

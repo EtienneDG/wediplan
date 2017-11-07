@@ -16,8 +16,53 @@ export default {
      return {
        root: 'guest-hot',
        hotSettings: {
-         data: [['sample', 'data']],
-         colHeaders: true
+         data: this.$store.state.guests.guests,
+         colHeaders: true,
+         columns: [{
+          //  data: 'id',
+           type: 'text'
+          //  width: 40
+         },
+         {
+          //  data: 'nom',
+           type: 'text'
+         },
+         {
+          //  data: 'prenom',
+           type: 'text'
+         },
+         {
+          //  data: 'lien',
+           type: 'text'
+         },
+         {
+          //  data: 'adulte',
+           type: 'numeric'
+         },
+         {
+          //  data: 'enfant',
+           type: 'numeric'
+         },
+         {
+          //  data: 'famille',
+           type: 'bool'
+         },
+         {
+          //  data: 'cote',
+           type: 'text'
+         },
+         {
+          //  data: 'vinhonneur',
+           type: 'bool'
+         },
+         {
+          //  data: 'repas',
+           type: 'bool'
+         },
+         {
+          //  data: 'commentaires',
+           type: 'text'
+         }]
        }
      };
    },

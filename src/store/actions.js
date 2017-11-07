@@ -23,23 +23,10 @@ export const incCount = ({commit}, count_payload) => {
   .then(json => commit(types.INC_COUNT, json));
 };
 
-// export const login = ({commit}) => {
-//   passport.authenticate('local'),
-//   (req, res) => {
-//     res.redirect('/');
-//   };
-// };
-
 export const getGuests = ({commit}) => {
   fetch(`/api/guest/all`, {
     method: 'GET'
   })
-  .then(response => {
-    console.log(response);
-    response.json();
-  })
-  .then(json => {
-    console.log(json);
-    commit(types.GET_GUESTS, json);
-  });
+  .then(response => response.json())
+  .then(json => commit(types.GET_GUESTS, json));
 };

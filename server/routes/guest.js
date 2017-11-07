@@ -12,9 +12,9 @@ module.exports = (() => {
   };
 
   router.get('/all', (req, res) => {
-    Guest.find((err, guests) => {
+    Guest.find((err, r) => {
       if (err) throw err;
-      return res.json({guests});
+      res.json({guests: r});
     });
   });
 
