@@ -10,12 +10,17 @@ import store from './store';
 Vue.use(VueRouter);
 Vue.use(Vuetify);
 
-const router = new VueRouter({
+let router = new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/counter', component: Counter },
-    { path: '/guests', component: GuestList }
+    { path: '/counter', component: Counter, meta: { title: 'Counter' } },
+    { path: '/guests', component: GuestList, meta: { title: 'Liste des invités' } }
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = 'WP - ' + to.meta.title;
+  next();
 });
 
 /* eslint-disable no-new */
