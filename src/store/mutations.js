@@ -10,5 +10,9 @@ export const mutations = {
   },
   [types.GET_GUESTS] (state, payload) {
     state.guests = payload;
+  },
+  [types.UPDATE_GUEST] (state, payload) {
+    debugger;
+    state.guests = payload;
   }
 };

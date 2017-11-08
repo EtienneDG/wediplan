@@ -18,6 +18,13 @@ module.exports = (() => {
     });
   });
 
+  router.post('/autosave', (req, res) => {
+    Guest.findOneAndUpdate((err, r) => {
+      if (err) throw err;
+      res.json({guests: r});
+    });
+  });
+
   router.post('/new', (req, res) => {
     const { guest } = req.body;
     const newScore = guest;

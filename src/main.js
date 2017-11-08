@@ -5,10 +5,15 @@ import Vuetify from 'vuetify';
 import App from './components/App.vue';
 import Counter from './components/Counter';
 import GuestList from './components/GuestList';
+import GuestIndicatorCard from './components/GuestIndicatorCard';
 import store from './store';
+import vueSmoothScroll from 'vue-smoothscroll';
 
 Vue.use(VueRouter);
 Vue.use(Vuetify);
+Vue.use(vueSmoothScroll);
+
+Vue.component('guest-indicator-card', GuestIndicatorCard);
 
 let router = new VueRouter({
   mode: 'history',

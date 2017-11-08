@@ -12,7 +12,8 @@ var Guest = new Schema({
   cote: String,
   vinhonneur: Boolean,
   repas: Boolean,
-  commentaire: String
+  commentaire: String,
+  lastUpdate: Date
 });
 
 module.exports = mongoose.model('Guest', Guest);

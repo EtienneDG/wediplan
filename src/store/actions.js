@@ -30,3 +30,16 @@ export const getGuests = ({commit}) => {
   .then(response => response.json())
   .then(json => commit(types.GET_GUESTS, json));
 };
+
+export const updateGuest = ({commit}, guest) => {
+  debugger;
+  guest['lastUpdate'] = new Date();
+  fetch(`/api/guest/autosave`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(guest)
+  });
+};
