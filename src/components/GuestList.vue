@@ -206,7 +206,6 @@
         var toPost = {id: id};
         console.log(property + toPost);
         toPost[property] = newValue;
-        debugger;
         this.$store.dispatch('updateGuest', toPost);
       }
     },

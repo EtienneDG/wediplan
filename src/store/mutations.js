@@ -12,7 +12,6 @@ export const mutations = {
     state.guests = payload;
   },
   [types.UPDATE_GUEST] (state, payload) {
-    debugger;
     state.guests = payload;
   }
 };

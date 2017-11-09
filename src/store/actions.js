@@ -32,7 +32,6 @@ export const getGuests = ({commit}) => {
 };
 
 export const updateGuest = ({commit}, guest) => {
-  debugger;
   guest['lastUpdate'] = new Date();
   fetch(`/api/guest/autosave`, {
     method: 'POST',

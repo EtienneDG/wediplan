@@ -4,9 +4,12 @@ const bodyParser = require('body-parser');
 const path = require('path');
 // const count = require('./server/routes/count');
 const guest = require('./server/routes/guest');
+const compression = require('compression');
 
 let app = express();
 require('dotenv').load();
+
+app.use(compression());
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URI);
