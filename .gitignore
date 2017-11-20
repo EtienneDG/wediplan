@@ -59,3 +59,5 @@ typings/
 .env
 dist/build.js
 dist/build.js.map
+resources/wediplan.pem
+resources/wediplan.ppk
