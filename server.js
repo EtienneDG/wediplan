@@ -12,7 +12,10 @@ require('dotenv').load();
 app.use(compression());
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URI);
+let options = {
+  useMongoClient: true
+};
+mongoose.connect(process.env.MONGO_URI, options);
 
 app.use(bodyParser.json());
 // app.use('/api/count', count);
