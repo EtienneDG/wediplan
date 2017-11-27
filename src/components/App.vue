@@ -1,7 +1,8 @@
 <template>
-  <v-app id="inspire">
+<v-app id="inspire">
     <v-navigation-drawer
       persistent
+      absolute
       v-model="drawer"
       enable-resize-watcher
       app
@@ -25,7 +26,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="red" dark fixed app :dense="isDense">
+    <v-toolbar color="red" dark app :dense="isDense">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>{{$route.meta.title}}</v-toolbar-title>
     </v-toolbar>
@@ -38,8 +39,8 @@
         </v-container>
       </v-content>
     </main>
-    <v-footer color="red" app>
-      <span class="white--text">EDG &copy; 2017</span>
+    <v-footer color="red">
+        <span class="white--text">EDG &copy; 2017</span>
     </v-footer>
   </v-app>
 </template>
