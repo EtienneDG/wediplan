@@ -2,9 +2,11 @@
     <v-card>
         <v-layout column wrap justify-space-between>
         <v-flex mt-3 pl-1 pr-1>
-            <v-layout row>
-            <v-flex><v-icon :class="color + '--text text--lighten-3 icon--xxl-large'">{{icon}}</v-icon></v-flex>
-            <v-flex class="number">
+            <v-layout row align-center justify-center>
+            <v-flex xs3 md6>
+                <v-icon :class="color + '--text text--lighten-3 icon--xxl-large'">{{icon}}</v-icon>
+            </v-flex>
+            <v-flex class="number" xs3 md6>
                 <div :class="color + '--text text-xs-center'" >
                 <strong class="number">{{number}}</strong> 
                 </div>

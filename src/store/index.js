@@ -13,8 +13,46 @@ const state = {
   }
 };
 
+const getters = {
+  guests: state => state.guests.guests,
+  numberOfAdults: state => {
+    if (state.guests.guests) {
+      return state.guests.guests
+      .map((guest) => guest.adulte)
+      .reduce((cur, prev) => cur + prev, 0);
+    }
+  },
+  numberOfChildren: state => {
+    if (state.guests.guests) {
+      return state.guests.guests
+      .map((guest) => guest.enfant)
+      .reduce((cur, prev) => cur + prev, 0);
+    }
+  },
+  numberOfGuests: (state, getters) => {
+    return getters.numberOfAdults + getters.numberOfChildren;
+  },
+  numberForCocktail: state => {
+    if (state.guests.guests) {
+      return state.guests.guests
+      .filter((guest) => guest.vindhonneur)
+      .map((guest) => guest.adulte + guest.enfant)
+      .reduce((cur, prev) => cur + prev, 0);
+    }
+  },
+  numberForMeal: state => {
+    if (state.guests.guests) {
+      return state.guests.guests
+      .filter((guest) => guest.repas)
+      .map((guest) => guest.adulte + guest.enfant)
+      .reduce((cur, prev) => cur + prev, 0);
+    }
+  }
+};
+
 export default new Vuex.Store({
   state,
+  getters,
   mutations,
   actions
 });

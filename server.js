@@ -27,13 +27,19 @@ mongoose.Promise = global.Promise;
 let options = {
   useMongoClient: true
 };
-mongoose.connect(process.env.MONGO_URI, options, function () { })
+
+if (process.env.MONGO_ENV !== 'dev') {
+  options['user'] = process.env.MONGO_USER;
+  options['pass'] = process.env.MONGO_PWD;
+  options['auth'] = {authdb: 'admin'};
+}
+
+mongoose.connect(process.env.MONGO_URI, options)
 .then(() => {
   return app;
 })
 .catch(err => {
   console.error(`App starting error :  
-    process.env.MONGO_URI : ${process.env.MONGO_URI}
     ${err.stack}`);
   process.exit(1);
 });
