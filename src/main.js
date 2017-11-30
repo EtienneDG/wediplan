@@ -1,17 +1,30 @@
 import Vue from 'vue';
-// import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
+
+// Components imports
 import App from './components/App.vue';
 import Counter from './components/Counter';
 import GuestList from './components/GuestList';
 import GuestIndicatorCard from './components/GuestIndicatorCard';
+
 import store from './store';
 import vueSmoothScroll from 'vue-smoothscroll';
+import VeeValidate from 'vee-validate';
+import frenchMessages from '../node_modules/vee-validate/dist/locale/fr.js';
 
 Vue.use(VueRouter);
 Vue.use(Vuetify);
 Vue.use(vueSmoothScroll);
+
+Vue.use(VeeValidate, {
+  locale: 'fr',
+  dictionary: {
+    fr: {
+      messages: frenchMessages.messages
+    }
+  }
+});
 
 Vue.component('guest-indicator-card', GuestIndicatorCard);
 

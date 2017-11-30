@@ -5,7 +5,7 @@
         <!-- <v-card> -->
         <v-layout row wrap justify-space-around>
           <v-flex xs12 md2 align-center>
-            <guest-indicator-card :number="numberOfGuests" text="Total" icon="people" color="green" :type="number"></guest-indicator-card>
+            <guest-indicator-card :number="numberOfGuests" text="Total" icon="people" color="green"></guest-indicator-card>
           </v-flex>
           <v-flex xs12 md2 align-center>
             <guest-indicator-card :number="numberOfAdults" text="Adultes" icon="person" color="light-blue"></guest-indicator-card>
@@ -65,30 +65,11 @@
           </template>
         </v-data-table>
       </v-flex>
-      <v-btn
-        fixed
-        dark
-        fab
-        bottom
-        right
-        color="green"
-        @click.stop="dialogCreateGuest=true">
-        <v-icon>add</v-icon>
-      </v-btn>
-        <v-dialog v-model="dialogCreateGuest" max-width="290">
-        <v-card>
-          <v-card-title class="headline">Ajouter un invité</v-card-title>
-          <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="red darken-1" flat="flat" @click.native="dialog = false">Annuler</v-btn>
-            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Ajouter</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <dialogue-create-guest/>
   </v-layout>
 </template>
 <script>
+  import DialogueCreateGuest from './DialogueCreateGuest';
   export default {
     data () {
       return {
@@ -205,10 +186,16 @@
         console.log(property + toPost);
         toPost[property] = newValue;
         this.$store.dispatch('updateGuest', toPost);
+      },
+      hideDialogue () {
+        this.dialogCreateGuest = !this.dialogCreateGuest;
       }
     },
     created () {
       this.$store.dispatch('getGuests');
+    },
+    components: {
+      DialogueCreateGuest
     }
   };
 </script>
