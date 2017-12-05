@@ -42,3 +42,16 @@ export const updateGuest = ({commit}, guest) => {
     body: JSON.stringify(guest)
   });
 };
+
+export const createGuest = ({commit}, guest) => {
+  guest['creationDate'] = new Date();
+  debugger;
+  fetch(`/api/guest/create`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(guest)
+  });
+};

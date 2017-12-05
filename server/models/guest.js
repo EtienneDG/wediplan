@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var Guest = new Schema({
+var GuestSchema = new Schema({
   id: String,
   nom: String,
   prenom: String,
@@ -13,7 +13,8 @@ var Guest = new Schema({
   vinhonneur: Boolean,
   repas: Boolean,
   commentaire: String,
+  creationDate: Date,
   lastUpdate: Date
 });
 
-module.exports = mongoose.model('Guest', Guest);
+module.exports = mongoose.model('Guest', GuestSchema);

@@ -6,10 +6,10 @@ module.exports = (() => {
 
   const router = express.Router();
 
-  const countProjection = {
-    __v: false,
-    _id: false
-  };
+  // const countProjection = {
+  //   __v: false,
+  //   _id: false
+  // };
 
   router.get('/all', (req, res) => {
     Guest.find((err, r) => {
@@ -25,12 +25,17 @@ module.exports = (() => {
     });
   });
 
-  router.post('/new', (req, res) => {
-    const { guest } = req.body;
-    const newScore = guest;
-    Guest.findOneAndUpdate({}, { count: newScore }, { projection: countProjection }, (err, score) => {
-      if (err) throw err;
-      res.json({ count: newScore });
+  router.post('/create', (req, res) => {
+    const guest = Object.create(req.body);
+    console.log(guest);
+    let newGuest = new Guest(guest);
+    console.log(newGuest);
+    console.log(newGuest.nom);
+    console.log(newGuest.prenom);
+    newGuest.save((err) => {
+      console.log('saving new guest');
+      if (err) return console.log(`Failed to save new guest : ${err}`);
+      // saved!
     });
   });
 

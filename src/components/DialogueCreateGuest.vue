@@ -10,55 +10,77 @@
             @click.stop="dialogCreateGuest=true">
             <v-icon>add</v-icon>
         </v-btn>
-        <v-dialog v-model="dialogCreateGuest" width="30%" >
+        <v-dialog v-model="dialogCreateGuest" max-width="500" >
             <v-card>
                 <v-card-title class="headline">Ajouter un invité</v-card-title>
-                <form @submit.prevent="validateForm">
+                <form @submit.prevent="validateForm" id="dialogueCreateGuest">
                     <v-card-text>
                     <v-text-field
-                        v-model="prenom"
+                        v-model="formData.prenom"
                         label="Prénom"
-                        :error-messages="errors.collect('prenom')"
+                        :error-messages="errors.collect('Prénom')"
                         v-validate="'required'"
                         data-vv-name="prenom"
                         class="input-group--required">
                     </v-text-field>
                     <v-text-field
-                        v-model="nom"
+                        v-model="formData.nom"
                         label="Nom"
-                        :error-messages="errors.collect('nom')"
+                        :error-messages="errors.collect('Nom')"
                         v-validate="'required'"
                         data-vv-name="nom"
                         class="input-group--required">
                     </v-text-field>
                     <v-text-field
-                        v-model="email"
+                        v-model="formData.email"
                         label="E-mail"
-                        :error-messages="errors.collect('email')"
+                        :error-messages="errors.collect('Email')"
                         data-vv-name="email"
                         v-validate="'email'"
                         class="input-group--required">
                     </v-text-field>
                     <v-select
-                        v-bind:items="items"
-                        v-model="select"
-                        label="Select"
+                        v-bind:items="cotes"
+                        v-model="formData.cote"
+                        label="Côté"
                         :error-messages="errors.collect('select')"
                         v-validate="'required'"
                         data-vv-name="select"
                         required>
-                        </v-select>
-                    <v-checkbox
-                        v-model="checkbox"
-                        value="1"
-                        label="Option"
-                        :error-messages="errors.collect('checkbox')"
-                        v-validate="'required'"
-                        data-vv-name="checkbox"
-                        type="checkbox"
-                        required>
-                    </v-checkbox> 
-                    </v-card-text>
+                    </v-select>
+                    <v-layout row wrap>
+                        <v-flex xs6 md4>
+                            <v-checkbox
+                            v-model="formData.famille"
+                            label="Famille"
+                            color="secondary"
+                            :error-messages="errors.collect('Famille')"
+                            data-vv-name="famille"
+                            type="checkbox">
+                            </v-checkbox> 
+                        </v-flex>
+                        <v-flex xs6 md4>
+                            <v-checkbox
+                                v-model="formData.vinhonneur"
+                                label="Vin d'honneur"
+                                color="secondary"
+                                :error-messages="errors.collect('vinhonneur')"
+                                data-vv-name="vinhonneur"
+                                type="checkbox">
+                            </v-checkbox> 
+                        </v-flex>
+                        <v-flex xs12 md4>
+                            <v-checkbox
+                                v-model="formData.repas"
+                                label="Repas"
+                                color="secondary"
+                                :error-messages="errors.collect('repas')"
+                                data-vv-name="repas"
+                                type="checkbox">
+                            </v-checkbox> 
+                        </v-flex>
+                    </v-layout>
+                    </v-card-text> 
                     <v-card-actions>  
                         <v-btn 
                             color="darken-1" 
@@ -85,22 +107,26 @@
         </v-dialog>
     </span>
 </template>
-
 <script>
 export default{
   data () {
     return {
-      prenom: '',
-      nom: '',
-      email: '',
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4'
+      cotes: [
+        'EDG',
+        'CD'
       ],
-      checkbox: null,
+      formData: {
+        prenom: '',
+        nom: '',
+        email: '',
+        select: null,
+        cote: '',
+        famille: false,
+        vinhonneur: false,
+        repas: false,
+        adulte: 1,
+        enfant: 0
+      },
       dialogCreateGuest: false
     };
   },
@@ -123,20 +149,27 @@ export default{
       this.dialogCreateGuest = false;
     },
     clear () {
-      this.prenom = '';
-      this.nom = '';
-      this.email = '';
-      this.select = null;
-      this.checkbox = null;
+      for (let prop in this.formData) {
+        this.formData[prop] = null;
+      }
       this.$validator.reset();
     },
     validateAndsubmit () {
-      this.$validator.validateAll().then((result) => {
+      let $v0 = this;
+      $v0.$validator.validateAll().then((result) => {
         if (result) {
           // call action to save data server side
-          this.dialogCreateGuest = false;
+          $v0.$store.dispatch('createGuest', this.formData);
+          $v0.dialogCreateGuest = false;
         }
       });
+    }
+  },
+  watch: {
+    dialogCreateGuest: {
+      handler: function (val) {
+        this.clear();
+      }
     }
   }
 };
