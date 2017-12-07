@@ -4,19 +4,19 @@
       <v-flex mb-5 mt-3>
         <!-- <v-card> -->
         <v-layout row wrap justify-space-around>
-          <v-flex xs12 md2 align-center>
+          <v-flex xs12 md2 align-center mb-1>
             <guest-indicator-card :number="numberOfGuests" text="Total" icon="people" color="green"></guest-indicator-card>
           </v-flex>
-          <v-flex xs12 md2 align-center>
+          <v-flex xs12 md2 align-center mb-1>
             <guest-indicator-card :number="numberOfAdults" text="Adultes" icon="person" color="light-blue"></guest-indicator-card>
           </v-flex>
-          <v-flex xs12 md2 align-center>
+          <v-flex xs12 md2 align-center mb-1>
             <guest-indicator-card :number="numberOfChildren" text="Enfants" icon="child_friendly" color="pink"></guest-indicator-card>
           </v-flex>
-          <v-flex xs12 md2 align-center>
+          <v-flex xs12 md2 align-center mb-1>
             <guest-indicator-card :number="numberForCocktail" text="Vin d'honneur" icon="local_bar" color="purple"></guest-indicator-card>
           </v-flex>
-          <v-flex xs12 md2 align-center>
+          <v-flex xs12 md2 align-center mb-1>
             <guest-indicator-card :number="numberForMeal" text="Repas" icon="restaurant" color="teal"></guest-indicator-card>
           </v-flex>
         </v-layout>
@@ -55,17 +55,30 @@
               </td>
               <td class="text-xs-center">{{ props.item.cote }}</td>
               <td class="text-xs-center">
-                <v-checkbox v-model="props.item.vindhonneur" color="blue-grey"></v-checkbox>
+                <v-checkbox v-model="props.item.vinhonneur" color="blue-grey" @change="autosave(props.item._id,'vinhonneur', $event)"></v-checkbox>
               </td>
               <td class="text-xs-right">
-                <v-checkbox v-model="props.item.repas" color="blue-grey"></v-checkbox>
+                <v-checkbox v-model="props.item.repas" color="blue-grey" @change="autosave(props.item._id,'repas', $event)"></v-checkbox>
               </td>
-              <td class="text-xs-right">{{ props.item.commentaire }}</td>
+              <td class="text-xs-center">
+                <v-btn flat icon outline color="red lighten-1" @click.native="remove(props.item._id)">
+                  <v-icon>delete</v-icon>
+                </v-btn>
+              </td>
             </tr>
           </template>
         </v-data-table>
       </v-flex>
       <dialogue-create-guest/>
+      <v-snackbar
+            :timeout="4000"
+            :bottom="true"
+            :right="true"
+            :vertical="false"
+            v-model="toastShow">
+            {{toastText}}
+            <v-btn flat color="red" @click.native="toastShow = false">Close</v-btn>
+      </v-snackbar>
   </v-layout>
 </template>
 <script>
@@ -73,6 +86,8 @@
   export default {
     data () {
       return {
+        toastShow: false,
+        toastText: '',
         dialogCreateGuest: false,
         root: 'guestable',
         pagination: {
@@ -80,18 +95,6 @@
           rowsPerPage: 25
         },
         headers: [
-          // {
-          //   text: 'objectid',
-          //   align: 'left',
-          //   sortable: false,
-          //   value: '_id'
-          // },
-          // {
-          //   text: 'ID',
-          //   align: 'left',
-          //   sortable: false,
-          //   value: 'id'
-          // },
           {
             text: 'Nom',
             align: 'center',
@@ -104,12 +107,6 @@
             sortable: true,
             value: 'prenom'
           },
-          // {
-          //   text: 'Lien',
-          //   align: 'left',
-          //   sortable: false,
-          //   value: 'lien'
-          // },
           {
             text: 'Adultes',
             align: 'center',
@@ -147,10 +144,9 @@
             value: 'repas'
           },
           {
-            text: 'Commentaires',
+            text: 'Suppr.',
             align: 'center',
-            sortable: false,
-            value: 'commentaire'
+            sortable: false
           }]
       };
     },
@@ -177,15 +173,30 @@
     },
     methods: {
       getFullNameFromLien (lien) {
-        return this.$store.state.guests.guests
+        return this.guestData
         .filter((guest) => guest.id === lien)
         .map((guest) => guest.prenom + ' ' + guest.nom.toUpperCase())[0];
       },
       autosave (id, property, newValue) {
+        let $v0 = this;
         var toPost = {id: id};
-        console.log(property + toPost);
         toPost[property] = newValue;
-        this.$store.dispatch('updateGuest', toPost);
+        $v0.$store.dispatch('updateGuest', toPost)
+        .then((r) => {
+          $v0.toastText = `Mise à jour réussie`;
+          $v0.toastShow = true;
+        });
+      },
+      remove (id) {
+        let $v0 = this;
+        var toPost = {id: id};
+        debugger;
+        $v0.$store.dispatch('deleteGuest', toPost)
+        .then((r) => {
+          debugger;
+          $v0.toastText = `Suppression réussie`;
+          $v0.toastShow = true;
+        });
       },
       hideDialogue () {
         this.dialogCreateGuest = !this.dialogCreateGuest;

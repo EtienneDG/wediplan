@@ -35,7 +35,7 @@ const getters = {
   numberForCocktail: state => {
     if (state.guests.guests) {
       return state.guests.guests
-      .filter((guest) => guest.vindhonneur)
+      .filter((guest) => guest.vinhonneur)
       .map((guest) => guest.adulte + guest.enfant)
       .reduce((cur, prev) => cur + prev, 0);
     }

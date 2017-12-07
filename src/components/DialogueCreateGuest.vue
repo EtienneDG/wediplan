@@ -131,23 +131,6 @@ export default{
     };
   },
   methods: {
-    submit () {
-      this.$validator.validateAll()
-      .then((result) => {
-        if (result) {
-          debugger;
-          console.log(result);
-        }
-      })
-      .then((result) => {
-        if (result) {
-          debugger;
-          console.log(result);
-        }
-      });
-    //   console.log(this.$validator.validateAll());
-      this.dialogCreateGuest = false;
-    },
     clear () {
       for (let prop in this.formData) {
         this.formData[prop] = null;

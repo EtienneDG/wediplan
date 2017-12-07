@@ -12,30 +12,54 @@ module.exports = (() => {
   // };
 
   router.get('/all', (req, res) => {
-    Guest.find((err, r) => {
+    Guest.find({disabled: {$ne: true}}, (err, r) => {
       if (err) throw err;
       res.json({guests: r});
     });
   });
 
   router.post('/autosave', (req, res) => {
-    Guest.findOneAndUpdate((err, r) => {
-      if (err) throw err;
-      res.json({guests: r});
+    Guest.findOneAndUpdate({_id: req.body.id}, req.body, (err, r) => {
+      let updatedData = req.body;
+      console.log(`autosave of ${updatedData.id} start`);
+      if (err) {
+        console.log(`autosave of ${updatedData.id} failed : ${err}`);
+        throw err;
+      };
+      console.log(`autosave of ${updatedData.id} done`);
+      res.json({guest: r});
     });
   });
 
   router.post('/create', (req, res) => {
     const guest = Object.create(req.body);
-    console.log(guest);
-    let newGuest = new Guest(guest);
-    console.log(newGuest);
-    console.log(newGuest.nom);
-    console.log(newGuest.prenom);
+    let newGuest = new Guest({
+      nom: guest.nom,
+      prenom: guest.prenom,
+      cote: guest.cote,
+      adulte: 1,
+      enfant: 0,
+      lien: '',
+      famille: guest.famille,
+      vinhonneur: guest.vinhonneur,
+      repas: guest.repas
+    });
     newGuest.save((err) => {
       console.log('saving new guest');
-      if (err) return console.log(`Failed to save new guest : ${err}`);
+      if (err) return console.log(`failed to save new guest : ${err}`);
       // saved!
+    });
+  });
+
+  router.post('/delete', (req, res) => {
+    Guest.findOneAndUpdate({_id: req.body.id}, {disabled: true}, (err, r) => {
+      let updatedData = req.body;
+      console.log(`deleting ${updatedData.id}`);
+      if (err) {
+        console.log(`failed to delete ${updatedData.id} : ${err}`);
+        throw err;
+      };
+      res.json({guest: r});
     });
   });
 

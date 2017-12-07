@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import * as types from './mutation-types';
-// import passport from 'passport-local';
 
 export const getCount = ({commit}) => {
   fetch(`/api/count`, {
@@ -40,12 +39,13 @@ export const updateGuest = ({commit}, guest) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(guest)
-  });
+  })
+  .then(response => response.json())
+  .then(json => commit(types.UPDATE_GUEST, json));
 };
 
 export const createGuest = ({commit}, guest) => {
   guest['creationDate'] = new Date();
-  debugger;
   fetch(`/api/guest/create`, {
     method: 'POST',
     headers: {
@@ -54,4 +54,17 @@ export const createGuest = ({commit}, guest) => {
     },
     body: JSON.stringify(guest)
   });
+};
+
+export const deleteGuest = ({commit}, guest) => {
+  fetch(`/api/guest/delete`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(guest)
+  })
+  .then(response => response.json())
+  .then(json => commit(types.DELETE_GUEST, json));
 };

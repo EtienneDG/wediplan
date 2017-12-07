@@ -14,7 +14,8 @@ var GuestSchema = new Schema({
   repas: Boolean,
   commentaire: String,
   creationDate: Date,
-  lastUpdate: Date
+  lastUpdate: Date,
+  disabled: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('Guest', GuestSchema);
