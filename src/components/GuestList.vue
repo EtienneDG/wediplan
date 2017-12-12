@@ -31,7 +31,7 @@
           <template slot="items" slot-scope="props">
             <tr>
               <td class="text-xs-center">
-                <v-tooltip right v-if="props.item.lien.length > 0">
+                <v-tooltip right v-if="props.item.lien && props.item.lien.length > 0">
                   <div slot="activator">{{ props.item.nom.toUpperCase() }}</div>
                   <span>{{getFullNameFromLien(props.item.lien)}}</span>
                 </v-tooltip>
@@ -40,7 +40,7 @@
                 </span>
               </td>
               <td class="text-xs-center">
-                <v-tooltip right v-if="props.item.lien.length > 0">
+                <v-tooltip right v-if="props.item.lien && props.item.lien.length > 0">
                   <div slot="activator">{{ props.item.prenom }}</div>
                   <span>{{getFullNameFromLien(props.item.lien)}}</span>
                 </v-tooltip>
@@ -190,10 +190,8 @@
       remove (id) {
         let $v0 = this;
         var toPost = {id: id};
-        debugger;
         $v0.$store.dispatch('deleteGuest', toPost)
         .then((r) => {
-          debugger;
           $v0.toastText = `Suppression réussie`;
           $v0.toastShow = true;
         });

@@ -14,7 +14,13 @@ const state = {
 };
 
 const getters = {
-  guests: state => state.guests.guests,
+  guests: state => {
+    if (state.guests.guests) {
+      return state.guests.guests
+      .filter((guest) => guest.disabled !== true);
+    }
+    return [];
+  },
   numberOfAdults: state => {
     if (state.guests.guests) {
       return state.guests.guests

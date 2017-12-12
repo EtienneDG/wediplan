@@ -5,7 +5,7 @@ var GuestSchema = new Schema({
   id: String,
   nom: String,
   prenom: String,
-  lien: String,
+  lien: {type: String, default: ''},
   adulte: Number,
   enfant: Number,
   famille: Boolean,
