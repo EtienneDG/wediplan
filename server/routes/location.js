@@ -9,7 +9,7 @@ module.exports = (() => {
   router.get('/all', (req, res) => {
     Location.find({disabled: {$ne: true}}, (err, r) => {
       if (err) throw err;
-      res.json({locations: r});
+      res.json(r);
     });
   });
 
@@ -31,7 +31,8 @@ module.exports = (() => {
     let newLocation = new Location({
       name: location.name,
       description: location.description,
-      address: location.address
+      address: location.address,
+      imageUrl: location.imageUrl
     });
     newLocation.save((err) => {
       console.log('saving new location');

@@ -2,8 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-// const count = require('./server/routes/count');
+
+// routes
 const guest = require('./server/routes/guest');
+const location = require('./server/routes/location');
 const compression = require('compression');
 
 let app = express();
@@ -13,6 +15,7 @@ app.use(compression());
 
 app.use(bodyParser.json());
 app.use('/api/guest', guest);
+app.use('/api/location', location);
 
 app.use(express.static(path.join(__dirname, './dist')));
 

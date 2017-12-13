@@ -6,6 +6,7 @@ var LocationSchema = new Schema({
   name: String,
   description: String,
   address: String,
+  imageUrl: String,
   disabled: {type: Boolean, default: false}
 });
 

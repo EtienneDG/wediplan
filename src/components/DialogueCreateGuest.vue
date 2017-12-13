@@ -13,14 +13,14 @@
         <v-dialog v-model="dialogCreateGuest" max-width="500" >
             <v-card>
                 <v-card-title class="headline">Ajouter un invité</v-card-title>
-                <form @submit.prevent="validateForm" id="dialogueCreateGuest">
+                <form @submit.prevent="validateForm">
                     <v-card-text>
                     <v-text-field
                         v-model="formData.prenom"
                         label="Prénom"
                         :error-messages="errors.collect('Prénom')"
                         v-validate="'required'"
-                        data-vv-name="prenom"
+                        data-vv-name="Prénom"
                         class="input-group--required">
                     </v-text-field>
                     <v-text-field
@@ -28,14 +28,14 @@
                         label="Nom"
                         :error-messages="errors.collect('Nom')"
                         v-validate="'required'"
-                        data-vv-name="nom"
+                        data-vv-name="Nom"
                         class="input-group--required">
                     </v-text-field>
                     <v-text-field
                         v-model="formData.email"
                         label="E-mail"
-                        :error-messages="errors.collect('Email')"
-                        data-vv-name="email"
+                        :error-messages="errors.collect('formData.email')"
+                        data-vv-name="formData.email"
                         v-validate="'email'"
                         class="input-group--required">
                     </v-text-field>
