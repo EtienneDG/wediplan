@@ -30,7 +30,7 @@ export const mutations = {
     state.guests[updateLocationIndex] = payload;
   },
   [types.CREATE_LOCATION] (state, payload) {
-    state.locations.append(payload);
+    state.locations.locations.append(payload);
   },
   [types.DELETE_LOCATION] (state, payload) {
     let deleteLocationIndex = state.locations.locations.findIndex(l => l.id === payload.id);

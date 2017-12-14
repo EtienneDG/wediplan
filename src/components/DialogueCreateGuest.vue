@@ -142,7 +142,7 @@ export default{
       $v0.$validator.validateAll().then((result) => {
         if (result) {
           // call action to save data server side
-          $v0.$store.dispatch('createGuest', this.formData);
+          $v0.$store.dispatch('createGuest', $v0.formData);
           $v0.dialogCreateGuest = false;
         }
       });

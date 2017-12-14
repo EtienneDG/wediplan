@@ -42,7 +42,8 @@ module.exports = (() => {
       lien: '',
       famille: guest.famille,
       vinhonneur: guest.vinhonneur,
-      repas: guest.repas
+      repas: guest.repas,
+      email: guest.email
     });
     newGuest.save((err) => {
       console.log('saving new guest');

@@ -10,6 +10,8 @@ const state = {
     count: -1
   },
   guests: {
+  },
+  locations: {
   }
 };
 
@@ -53,6 +55,14 @@ const getters = {
       .map((guest) => guest.adulte + guest.enfant)
       .reduce((cur, prev) => cur + prev, 0);
     }
+  },
+
+  locations: state => {
+    if (state.locations.locations) {
+      return state.locations.locations
+      .filter((location) => location.disabled !== true);
+    }
+    return [];
   }
 };
 

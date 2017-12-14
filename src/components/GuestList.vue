@@ -29,7 +29,7 @@
         :pagination.sync="pagination"
         class="elevation-1">
           <template slot="items" slot-scope="props">
-            <tr>
+            <tr v-if="!props.item.disabled">
               <td class="text-xs-center">
                 <v-tooltip right v-if="props.item.lien && props.item.lien.length > 0">
                   <div slot="activator">{{ props.item.nom.toUpperCase() }}</div>
@@ -187,7 +187,7 @@
           $v0.toastShow = true;
         });
       },
-      remove (id) {
+      remove (id, event) {
         let $v0 = this;
         var toPost = {id: id};
         $v0.$store.dispatch('deleteGuest', toPost)

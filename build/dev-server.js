@@ -19,6 +19,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const count = require('../server/routes/count');
 const guest = require('../server/routes/guest');
+const location = require('../server/routes/location');
 
 const devServer = require('../server')
 // default port where dev server listens for incoming traffic
@@ -38,6 +39,7 @@ mongoose.connect(process.env.MONGO_URI);
 app.use(bodyParser.json());
 app.use('/api/count', count);
 app.use('/api/guest', guest);
+app.use('/api/location', location);
 
 // app.use(express.static(path.join(__dirname, '../dist')));
 

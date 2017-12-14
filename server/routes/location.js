@@ -9,7 +9,7 @@ module.exports = (() => {
   router.get('/all', (req, res) => {
     Location.find({disabled: {$ne: true}}, (err, r) => {
       if (err) throw err;
-      res.json(r);
+      res.json({locations: r});
     });
   });
 
@@ -22,7 +22,7 @@ module.exports = (() => {
         throw err;
       };
       console.log(`autosave of ${updatedData.id} done`);
-      res.json({guest: r});
+      res.json({location: r});
     });
   });
 
@@ -49,7 +49,7 @@ module.exports = (() => {
         console.log(`failed to delete ${updatedData.id} : ${err}`);
         throw err;
       };
-      res.json({guest: r});
+      res.json({location: r});
     });
   });
 

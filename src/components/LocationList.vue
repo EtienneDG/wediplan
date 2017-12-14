@@ -1,37 +1,13 @@
 <template>
     <v-layout row wrap>
-      <v-flex xs12 md4 mb-4 v-for="location in locations" :key="location.id">
+      <v-flex xs12 md4 mb-4 v-for="location in locationData" :key="location.id">
           <location-card 
             class="mr-2" 
             :name="location.name" 
-            :description="'test description'" 
-            :address="'34 boulevard de Sébastopol, 75004 Paris'">
+            :address="location.address"
+            :imageUrl="location.imageUrl">
           </location-card>
       </v-flex>
-      <!-- <v-flex xs12 md4 mb-4>
-          <location-card 
-            class="mr-2" 
-            :name="'test'" 
-            :description="'test description'" 
-            :address="'34 boulevard de Sébastopol, 75004 Paris'">
-          </location-card>
-      </v-flex>
-      <v-flex xs12 md4 mb-4>
-          <location-card 
-            class="mr-2" 
-            :name="'test'" 
-            :description="'test description'" 
-            :address="'34 boulevard de Sébastopol, 75004 Paris'">
-          </location-card>
-      </v-flex>
-      <v-flex xs12 md4 mb-4>
-          <location-card 
-            class="mr-2" 
-            :name="'test'" 
-            :description="'test description'" 
-            :address="'34 boulevard de Sébastopol, 75004 Paris'">
-          </location-card>
-      </v-flex> -->
       <dialogue-create-location/>
       <v-snackbar
           :timeout="4000"
@@ -56,6 +32,11 @@ export default {
       toastShow: false,
       toastText: ''
     };
+  },
+  computed: {
+    locationData () {
+      return this.$store.getters.locations || [];
+    }
   },
   components: {
     LocationCard,
