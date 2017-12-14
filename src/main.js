@@ -11,13 +11,22 @@ import LocationList from './components/LocationList';
 import LocationDetail from './components/LocationDetail';
 
 import store from './store';
-import vueSmoothScroll from 'vue-smoothscroll';
+
+// Packages imports
+import VueSmoothScroll from 'vue-smoothscroll';
 import VeeValidate from 'vee-validate';
 import frenchMessages from '../node_modules/vee-validate/dist/locale/fr.js';
+import * as VueGoogleMaps from 'vue2-google-maps';
 
 Vue.use(VueRouter);
 Vue.use(Vuetify);
-Vue.use(vueSmoothScroll);
+Vue.use(VueSmoothScroll);
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: '', // TODO key
+    libraries: 'places'
+  }
+});
 
 Vue.use(VeeValidate, {
   locale: 'fr',
