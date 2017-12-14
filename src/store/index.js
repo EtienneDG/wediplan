@@ -1,74 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { mutations } from './mutations';
-import * as actions from './actions';
+
+import guestModule from './modules/guest/store';
+import locationModule from './modules/location/store';
 
 Vue.use(Vuex);
 
-const state = {
-  counts: {
-    count: -1
-  },
-  guests: {
-  },
-  locations: {
-  }
-};
-
-const getters = {
-  guests: state => {
-    if (state.guests.guests) {
-      return state.guests.guests
-      .filter((guest) => guest.disabled !== true);
-    }
-    return [];
-  },
-  numberOfAdults: state => {
-    if (state.guests.guests) {
-      return state.guests.guests
-      .map((guest) => guest.adulte)
-      .reduce((cur, prev) => cur + prev, 0);
-    }
-  },
-  numberOfChildren: state => {
-    if (state.guests.guests) {
-      return state.guests.guests
-      .map((guest) => guest.enfant)
-      .reduce((cur, prev) => cur + prev, 0);
-    }
-  },
-  numberOfGuests: (state, getters) => {
-    return getters.numberOfAdults + getters.numberOfChildren;
-  },
-  numberForCocktail: state => {
-    if (state.guests.guests) {
-      return state.guests.guests
-      .filter((guest) => guest.vinhonneur)
-      .map((guest) => guest.adulte + guest.enfant)
-      .reduce((cur, prev) => cur + prev, 0);
-    }
-  },
-  numberForMeal: state => {
-    if (state.guests.guests) {
-      return state.guests.guests
-      .filter((guest) => guest.repas)
-      .map((guest) => guest.adulte + guest.enfant)
-      .reduce((cur, prev) => cur + prev, 0);
-    }
-  },
-
-  locations: state => {
-    if (state.locations.locations) {
-      return state.locations.locations
-      .filter((location) => location.disabled !== true);
-    }
-    return [];
-  }
-};
-
 export default new Vuex.Store({
-  state,
-  getters,
-  mutations,
-  actions
+  modules: {
+    guests: guestModule,
+    locations: locationModule
+  }
 });

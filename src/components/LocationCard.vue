@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <router-link :to="{path: '/guests'}">
+        <router-link :to="{path: '/location/' + name}">
             <v-card-media height="200px" :src="imageUrl">
                 <v-container fill-height fluid>
                     <v-layout fill-height>

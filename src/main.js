@@ -8,6 +8,7 @@ import Counter from './components/Counter';
 import GuestList from './components/GuestList';
 import GuestIndicatorCard from './components/GuestIndicatorCard';
 import LocationList from './components/LocationList';
+import LocationDetail from './components/LocationDetail';
 
 import store from './store';
 import vueSmoothScroll from 'vue-smoothscroll';
@@ -34,7 +35,8 @@ let router = new VueRouter({
   routes: [
     { path: '/counter', component: Counter, meta: { title: 'Counter' } },
     { path: '/guests', component: GuestList, meta: { title: 'Liste des invités' } },
-    { path: '/locations', component: LocationList, meta: { title: 'Choix des salles' } }
+    { path: '/locations', component: LocationList, meta: { title: 'Choix des salles' } },
+    { path: '/location/:name', component: LocationDetail, meta: { title: 'Détail de la salle' } }
   ]
 });
 
